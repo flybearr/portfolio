@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .slider_container {
+
+            /* margin: 30px auto; */
+            width: 400px;
+            height: 280px;
+            position: relative;
+            /* border: 20px solid;     */
+            /* border-color: #fff; */
+            /* border-bottom-width: 100px; */
+            background-color: #f5f5f5;
+            box-shadow: #666 0 0 5px;
+        }
+
+        .slider_container div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+        .slider_container div {
+            -webkit-animation: round 25s linear infinite;
+            animation: round 25s linear infinite;
+        }
+
+        @-webkit-keyframes round {
+            4% {
+                opacity: 1;
+                filter: alpha(opacity=100);
+                /* 0 - 1秒 淡入*/
+            }
+
+            20% {
+                opacity: 1;
+                filter: alpha(opacity=100);
+                /* 1- 5秒靜止*/
+            }
+
+            24% {
+                opacity: 0;
+                filter: alpha(opacity=0);
+                /* 5-6秒淡出*/
+            }
+        }
+
+        @keyframes round {
+            4% {
+                opacity: 1;
+                filter: alpha(opacity=100);
+                /* 0 - 1秒 淡入*/
+            }
+
+            20% {
+                opacity: 1;
+                filter: alpha(opacity=100);
+                /* 1- 5秒靜止*/
+            }
+
+            24% {
+                opacity: 0;
+                filter: alpha(opacity=0);
+                /* 5-6秒淡出*/
+            }
+        }
+
+        .slider_container div:nth-child(5) {
+            -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+        }
+
+        .slider_container div:nth-child(4) {
+            -webkit-animation-delay: 5s;
+            animation-delay: 5s;
+        }
+
+        .slider_container div:nth-child(3) {
+            -webkit-animation-delay: 10s;
+            animation-delay: 10s;
+        }
+
+        .slider_container div:nth-child(2) {
+            -webkit-animation-delay: 15s;
+            animation-delay: 15s;
+        }
+
+        .slider_container div:nth-child(1) {
+            -webkit-animation-delay: 20s;
+            animation-delay: 20s;
+        }
+
+        .slider_container span {
+            color: #000;
+            background: #fff;
+            position: absolute;
+            left: 0%;
+            top: 280px;
+            width: 400px;
+            height: 100px;
+            font-size: 30px;
+            text-align: center;
+            line-height: 100px;
+            -webkit-transform: scaleY(0);
+            -ms-transform: scaleY(0);
+            transform: scaleY(0);
+            -webkit-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .slider_container:hover span {
+            width: 100%;
+            -webkit-transform: scaleY(1);
+            -ms-transform: scaleY(1);
+            transform: scaleY(1);
+        }
+
+        .slider_container:hover div {
+            -webkit-animation-play-state: paused;
+            animation-play-state: paused;
+        }
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            aspect-ratio: 400/280;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider_container">
+        <div>
+            <img src="./img/3_1024.jpg" alt="pure css3 slider" />
+            <span class="info">Image Description 1</span>
+        </div>
+        <div>
+            <img src="./img/3_1024.jpg" alt="pure css3 slider" />
+            <span class="info">Image Description 2</span>
+        </div>
+        <div>
+            <img src="./img/3_1024.jpg" alt="pure css3 slider" />
+            <span class="info">Image Description 3</span>
+        </div>
+        <div>
+            <img src="./img/3_1024.jpg" alt="pure css3 slider" />
+            <span class="info">Image Description 4</span>
+        </div>
+        <div>
+            <img src="./img/3_1024.jpg" alt="pure css3 slider" />
+            <span class="info">Image Description 5</span>
+        </div>
+    </div>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script>
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max - 50) + 100);
+        }
+
+        function getRBGA() {
+            return `linear-gradient(135deg, rgba(${getRandomInt(256)},${getRandomInt(256)},${getRandomInt(256)},.5), rgba(${getRandomInt(256)},${getRandomInt(256)},${getRandomInt(256)},.8)`
+        }
+
+        const elements = document.querySelectorAll('.autobg');
+
+        Array.from(elements).forEach((element, index) => {
+            element.style.backgroundImage = getRBGA();
+        });
+
+// $('.autobg').each(function (index, currentElement) {
+//     currentElement.style.backgroundImage = getRBGA();
+// });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

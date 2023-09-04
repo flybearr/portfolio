@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <style></style>
+  <title>蜜蜂遊戲!</title>
+</head>
+
+<body>
+  <div id="game" data-status="start">
+    <div class="game-panel">
+      <section class="game-intro game-ui">
+        <h1 class="section-title">打蜜蜂</h1>
+        <p class="game-desc">有趣的打蜜蜂遊戲，使用 ← 和 → 操作你的灰機，使用空格（space）射擊！</p>
+        <p class="game-level">當前Level: 1</p>
+        <button class="js-play button">開始遊戲</button>
+      </section>
+      <section class="game-failed game-ui">
+        <h1 class="section-title">遊戲結束</h1>
+        <p class="game-info-text">最終得分: <span class="score"></span></p>
+        <button class="js-replay button">重新開始</button>
+      </section>
+      <section class="game-success game-ui">
+        <h1 class="section-title">成功</h1>
+        <p class="game-next-level game-info-text"></p>
+        <button class="js-next button">繼續遊戲</button>
+      </section>
+      <section class="game-all-success game-ui">
+        <h1 class="section-title">通關成功</h1>
+        <p class="game-next-level game-info-text">你已經成打完這些小蜜蜂。</p>
+        <button class="js-replay button">再玩一次</button>
+      </section>
+    </div>
+    <canvas id="canvas" width="700" height="600">
+
+    </canvas>
+  </div>
+  <script>
+    const CONFIG = {
+      status: "start", //
+      level: 3, //
+      totalLevel: 4, //
+      numPerLine: 7, // 一行多少個密蜂
+      canvasPadding: 30, // 畫布間隔
+      bulletSize: 10, //  子彈大小
+      bulletSpeed: 10, // 子彈速度
+      akSize: 10,
+      akSpeed: 10, // 默认子弹的移动速度
+      enemySpeed: 3, // 蜜蜂移動速度
+      enemySize: 50, // 蜜蜂尺寸
+      enemyGap: 10, // 與蜜蜂距離
+      enemyIcon: "./img/bee.png", // 蜜蜂
+      enemyBoomIcon: "./img/boom.png", // 死亡畫面
+      enemyDirection: "right",
+      planeSpeed: 5, // 飛機速度
+      planeSize: {
+        width: 60,
+        height: 100,
+      }, // 灰機size
+      planeIcon: "./img/plane.png", // 灰機圖像
+      skill: false,
+    };
+  </script>
+  <script src="./js/bullet.js"></script>
+  <script src="./js/bee.js"></script>
+  <script src="./js/player.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+
+</html>

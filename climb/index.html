@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>animation</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+      .filltextArea {
+        width: 20%;
+      }
+      .test {
+        width: 50%;
+        height: 800px;
+        background-color: #ccc;
+        position: relative;
+        z-index: -3;
+        margin: 0 auto;
+      }
+
+      .box {
+        width: 200px;
+        height: 200px;
+        /* background-color: #faf; */
+        /* border-radius: 50%; */
+        animation: spinIt 2s forwards linear;
+        position: absolute;
+        left: 0px;
+        bottom: -30px;
+        z-index: -2;
+      }
+
+      .flag {
+        position: absolute;
+        z-index: -2;
+        animation: fadein 1s 2s forwards linear;
+        top: -100px;
+      }
+
+      .flag img {
+        width: 50px;
+        height: 100px;
+      }
+
+      .mountain {
+        /* width:700px; */
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+      }
+
+      .mountain img {
+        width: 700px;
+        height: 400px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="filltextArea">
+        <input id="number" type="text" />
+        <label for="number">請輸入數字</label>
+        <button>送出</button>
+        <button>重設</button>
+      </div>
+      <div class="test">
+        <div class="mountain">
+          <img src="./img/mountain.png" alt="" />
+        </div>
+        <div class="box">
+          <img src="./img/man.png" alt="" />
+        </div>
+        <div class="flag">
+          <img src="./img/flag.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <script>
+      //取得input值
+      const inputValue = document.querySelectorAll("#number");
+
+      const button = document.querySelectorAll("button");
+
+      let str = "";
+      let str2 = "";
+      const mountain_w = document.querySelector(".mountain img").offsetWidth;
+      const mountain_h = document.querySelector(".mountain img").offsetHeight;
+
+      const flag = document.querySelector(".flag");
+      const flag_w = document.querySelector(".flag img").offsetWidth;
+      const flag_h = document.querySelector(".flag img").offsetHeight;
+      const test_w = document.querySelector(".test").offsetWidth;
+      const test_h = document.querySelector(".test").offsetHeight;
+
+      button[0].addEventListener("click", run);
+      button[1].addEventListener("click", reset);
+
+      function reset() {
+        location.reload();
+      }
+
+      function run() {
+        //圖片x=350 y=440
+        //要位移的比率 distance/(最高值10000)
+        //比率乘以圖片的X軸 = 要位移的X px;
+        //比率乘以圖片的y軸 = 要位移的y px;
+        const distance = inputValue[0].value;
+        let j = 15;
+
+        let precent = distance / 10000;
+
+        // 330為圖片的一半寬度
+        let x = ((mountain_w / 2.2) * precent) / 100;
+        // 400為圖片的高度
+        let y = (mountain_h * precent) / 100;
+
+        for (let i = 0; i <= 100; i = i + 5) {
+          if (i % 2 != 0) {
+            str += ` ${i}% { transform: translate(${i * x}px, -${
+              i * y + j
+            }px)}`;
+          } else {
+            str += `${i}% { transform: translate(${i * x}px, -${i * y}px) }`;
+          }
+        }
+
+        let flag_down = test_h - 100 * y - flag_h;
+        let flag_x = test_w - 100 * x - flag_w;
+
+        //人
+        let style = document.createElement("style");
+        let keyFrames = `@keyframes spinIt {${str}}`;
+
+        style.innerHTML = keyFrames;
+        document.getElementsByTagName("head")[0].appendChild(style);
+
+        flag_run(flag_x, flag_down);
+      }
+
+      function flag_run(flag_x, flag_down) {
+        flag.setAttribute("style", `right:${flag_x}px;`);
+
+        str2 = ` 100% { transform: translate(0px, ${flag_down + 80}px)}`;
+
+        // 旗子
+        let style2 = document.createElement("style");
+        let keyFrames2 = `@keyframes fadein {${str2}}`;
+
+        style2.innerHTML = keyFrames2;
+        document.getElementsByTagName("head")[0].appendChild(style2);
+      }
+    </script>
+  </body>
+</html>
